@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование товара</title>
+</head>
+<body>
+<h3>Редактирование товара</h3>
+<form th:method="POST" th:action="@{/product/edit/{id}(id=${edit_product.getId()})}" th:object="${edit_product}">
+    <label for="name">Введите наименование товара: </label>
+    <input type="text" th:field="*{name}" id="name">
+    <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+    <br>
+    <label for="price">Введите цену товара: </label>
+    <input type="text" th:field="*{price}" id="price">
+    <div style="color: red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
+    <br>
+    <label for="weight">Введите вес товара: </label>
+    <input type="text" th:field="*{weight}" id="weight">
+    <div style="color: red" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"></div>
+    <br>
+    <label for="provider">Выберите поставщика: </label>
+    <select id="provider" th:field="*{provider}">
+        <option th:each="enum : ${T(com.example.products.enumm.Provider).values()}"
+                th:text="${enum.getDisplayValue()}"
+                th:value = "${enum}">
+        </option>
+    </select>
+    <div style="color: red" th:if="${#fields.hasErrors('provider')}" th:errors="*{provider}"></div>
+    <br>
+    <input type="submit" value="Изменить">
+</form>
+</body>
+</html>
